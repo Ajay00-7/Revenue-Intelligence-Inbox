@@ -1,8 +1,8 @@
 import type { Conversation, Metrics, ImportSummary } from './types';
 
 // Support both Vite proxy and direct backend URL
-const API_BASE = '/api';
-const DIRECT_BACKEND = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
+const DIRECT_BACKEND = API_BASE.startsWith('http') ? API_BASE : 'http://localhost:8000';
 
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   let url = `${API_BASE}${endpoint}`;

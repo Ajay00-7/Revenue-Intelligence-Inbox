@@ -44,9 +44,10 @@ except Exception as e:
 app = FastAPI(title="Revenue Intelligence Inbox API", version="1.0.0")
 
 # Allow frontend to access API
+import os
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[os.getenv("FRONTEND_ORIGIN", "*")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
